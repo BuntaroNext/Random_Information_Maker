@@ -1,7 +1,5 @@
 <script setup lang="ts">
-defineProps<{
-  msg: string
-}>()
+
 
 async function random() {
   const partners = ['1307','1308','1340']
