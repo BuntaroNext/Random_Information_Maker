@@ -2,13 +2,20 @@
 defineProps<{
   msg: string
 }>()
+
+function marry() {
+  console.log('結婚しました')
+}
+
 </script>
 
 <template>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
     <h3>
-      You’ve successfully created a project with
+      <button @click="marry">
+        結婚しよう
+      </button>
       <a href="https://vite.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
     </h3>
