@@ -3,22 +3,41 @@ defineProps<{
   msg: string
 }>()
 
-function marry() {
-  console.log('結婚しました')
-}
+async function random() {
+  const partners = ['1307','1308','1340']
+  const n = partners.length
+  const index = Math.floor(Math.random() * n)
+  console.log(partners[index])
+  
+  const url='https://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsData' +
+    '?appId=5ad4bda309c2bf8094ad8a28a0478baecff27294' +
+    '&lang=J' +
+    '&statsDataId=0003349481' +
+    '&sectionHeaderFlg=2' +
+    '&replaceSpChars=0'
 
+  const res = await fetch(url)
+  const text = await res.text()
+
+  const blob = new Blob(['\uFEFF', text], { type: 'text/csv;charset=utf-8' })
+  const blobUrl = URL.createObjectURL(blob)
+
+  const a = document.createElement('a')
+  a.href = blobUrl
+  a.download = 'estat_0003288322.csv'
+  a.click()
+
+  URL.revokeObjectURL(blobUrl)
+}
 </script>
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      <button @click="marry">
+    <h1>
+      <button @click="random">
         結婚しよう
       </button>
-      <a href="https://vite.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
-    </h3>
+    </h1>
   </div>
 </template>
 
