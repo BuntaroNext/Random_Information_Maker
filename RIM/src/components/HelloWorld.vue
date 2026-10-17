@@ -9,14 +9,7 @@ async function random() {
   const index = Math.floor(Math.random() * n)
   console.log(partners[index])
   
-  const url='https://api.e-stat.go.jp/rest/3.0/app/getSimpleStatsData' +
-    '?appId=5ad4bda309c2bf8094ad8a28a0478baecff27294' +
-    '&lang=J' +
-    '&statsDataId=0003349481' +
-    '&sectionHeaderFlg=2' +
-    '&replaceSpChars=0'
-
-  const res = await fetch(url)
+  const res = await fetch('/api/estat')
   const text = await res.text()
 
   const blob = new Blob(['\uFEFF', text], { type: 'text/csv;charset=utf-8' })
@@ -24,7 +17,7 @@ async function random() {
 
   const a = document.createElement('a')
   a.href = blobUrl
-  a.download = 'estat_0003288322.csv'
+  a.download = 'estat_0003349481.csv'
   a.click()
 
   URL.revokeObjectURL(blobUrl)
@@ -35,7 +28,7 @@ async function random() {
   <div class="greetings">
     <h1>
       <button @click="random">
-        結婚しよう
+        ランダム
       </button>
     </h1>
   </div>
